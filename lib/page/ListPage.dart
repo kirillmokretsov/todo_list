@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:todo_list/database/HiveUtils.dart';
 
 class ListPage extends StatefulWidget {
