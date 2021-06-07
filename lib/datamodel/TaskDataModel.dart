@@ -1,8 +1,21 @@
-class Task {
+import 'package:hive/hive.dart';
+
+@HiveType(typeId: 0)
+class Task extends HiveObject {
+
+  @HiveField(0)
   String id;
+
+  @HiveField(1)
   String title;
+
+  @HiveField(2)
   int timeAdded;
+
+  @HiveField(3)
   int timeEdited;
+
+  @HiveField(4)
   bool isCompleted;
 
   Task({
@@ -12,30 +25,4 @@ class Task {
     required this.timeEdited,
     this.isCompleted: false,
   });
-
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'title': title,
-        'timeAdded': timeAdded,
-        'timeEdited': timeEdited,
-        'isCompleted': isCompleted,
-      };
-
-  static Task fromMap(Map<String, dynamic> map) {
-    String id = map['id'] ?? (throw Exception('Map id is null'));
-    String title = map['title'] ?? (throw Exception('Map title is null'));
-    int timeAdded =
-        map['timeAdded'] ?? (throw Exception('Map timeAdded is null'));
-    int timeEdited =
-        map['timeEdited'] ?? (throw Exception('Map timeEdited is null'));
-    bool isCompleted =
-        map['isCompleted'] ?? (throw Exception('Map isCompleted is null'));
-    return Task(
-      id: id,
-      title: title,
-      timeAdded: timeAdded,
-      timeEdited: timeEdited,
-      isCompleted: isCompleted,
-    );
-  }
 }
