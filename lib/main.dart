@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         accentColor: Colors.amberAccent,
       ),
-      home: ListPage(title: 'Todos'),
+      home: ListPage(false, title: 'Todos'),
     );
   }
 }

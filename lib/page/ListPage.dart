@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:todo_list/database/HiveUtils.dart';
 import 'package:todo_list/datamodel/TaskDataModel.dart';
 import 'package:todo_list/dialog/EditTaskDialog.dart';
 import 'package:uuid/uuid.dart';
 
 class ListPage extends StatefulWidget {
-  ListPage({Key? key, required this.title}) : super(key: key);
+  final bool isCompleted;
+
+  ListPage(this.isCompleted, {Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -14,7 +17,13 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  var box = HiveUtils.getBox();
+  late Box<Task> box;
+
+  @override
+  void initState() {
+    super.initState();
+    box = HiveUtils.getBox(widget.isCompleted);
+  }
 
   Widget _buildTile(BuildContext context, int index) {
     Task? task = box.getAt(index);
@@ -91,7 +100,7 @@ class _ListPageState extends State<ListPage> {
       ),
     );
     if (result is Task) {
-      HiveUtils.getBox().add(result);
+      box.add(result);
     }
     setState(() {});
   }
