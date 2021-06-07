@@ -22,7 +22,10 @@ class _ListPageState extends State<ListPage> {
       return ListTile(
         leading: Checkbox(
           value: task.isCompleted,
-          onChanged: (bool? value) => task.isCompleted = value!,
+          onChanged: (bool? value) {
+            task.isCompleted = value!;
+            setState(() {});
+          },
         ),
         title: Text(task.title),
       );
