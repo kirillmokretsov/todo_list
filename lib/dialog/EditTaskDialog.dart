@@ -59,6 +59,7 @@ class _EditTaskDialogState extends State<EditTaskDialog> {
   void _save() {
     if (_key.currentState!.validate()) {
       widget.task.title = title;
+      widget.task.timeEdited = DateTime.now().millisecondsSinceEpoch;
       Navigator.pop(context, widget.task);
     }
   }
