@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:todo_list/database/HiveUtils.dart';
 
 class ListPage extends StatefulWidget {
   ListPage({Key? key, required this.title}) : super(key: key);
@@ -6,18 +8,26 @@ class ListPage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ListPageState createState() => _ListPageState();
 }
 
-class _MyHomePageState extends State<ListPage> {
+class _ListPageState extends State<ListPage> {
+  Widget _buildTile(BuildContext context, int index) => ListTile();
+
   @override
   Widget build(BuildContext context) {
+
+    var box = HiveUtils.getBox();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Text("Hello World!"),
+      body: ListView.separated(
+        itemBuilder: _buildTile,
+        separatorBuilder: (BuildContext context, int index) => Divider(),
+        itemCount: box.length,
+        padding: EdgeInsets.all(16.0),
       ),
     );
   }
