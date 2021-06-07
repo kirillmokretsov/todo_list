@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/database/HiveUtils.dart';
 import 'package:todo_list/datamodel/TaskDataModel.dart';
+import 'package:todo_list/dialog/EditTaskDialog.dart';
+import 'package:uuid/uuid.dart';
 
 class ListPage extends StatefulWidget {
   ListPage({Key? key, required this.title}) : super(key: key);
@@ -40,6 +42,28 @@ class _ListPageState extends State<ListPage> {
         itemCount: box.length,
         padding: EdgeInsets.all(16.0),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _addTask,
+        child: Icon(Icons.add),
+      ),
     );
+  }
+
+  void _addTask() async {
+    final result = await showDialog(
+      context: context,
+      builder: (context) => EditTaskDialog(
+        Task(
+          id: Uuid().v4(),
+          title: '',
+          timeAdded: DateTime.now().millisecondsSinceEpoch,
+          timeEdited: DateTime.now().millisecondsSinceEpoch,
+        ),
+      ),
+    );
+    if (result is Task) {
+      HiveUtils.getBox().add(result);
+    }
+    setState(() {});
   }
 }
