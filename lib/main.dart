@@ -5,9 +5,7 @@ import 'package:todo_list/database/HiveUtils.dart';
 import 'package:todo_list/datamodel/TaskDataModel.dart';
 import 'package:todo_list/page/ListPage.dart';
 
-// TODO: add ability to delete task
 // TODO: add ability to complete task
-// TODO: add ability to edit task
 // TODO: add ability to sort tasks
 
 void main() async {

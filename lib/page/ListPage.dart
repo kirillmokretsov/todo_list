@@ -19,15 +19,41 @@ class _ListPageState extends State<ListPage> {
   Widget _buildTile(BuildContext context, int index) {
     Task? task = box.getAt(index);
     if (task != null)
-      return ListTile(
-        leading: Checkbox(
-          value: task.isCompleted,
-          onChanged: (bool? value) {
-            task.isCompleted = value!;
-            setState(() {});
-          },
+      return Dismissible(
+        key: UniqueKey(),
+        child: ListTile(
+          leading: Checkbox(
+            value: task.isCompleted,
+            onChanged: (bool? value) {
+              task!.isCompleted = value!;
+              setState(() {});
+            },
+          ),
+          title: Text(task.title),
         ),
-        title: Text(task.title),
+        background: Container(
+          color: Colors.green,
+          child: Icon(Icons.edit),
+        ),
+        secondaryBackground: Container(
+          color: Colors.red,
+          child: Icon(Icons.delete),
+        ),
+        onDismissed: (direction) async {
+          if (direction == DismissDirection.endToStart) {
+            box.deleteAt(index);
+          } else if (direction == DismissDirection.startToEnd) {
+            final result = await showDialog(
+              context: context,
+              builder: (context) => EditTaskDialog(task!),
+            );
+            if (result is Task) {
+              box.putAt(index, result);
+              task = result;
+              setState(() {});
+            }
+          }
+        },
       );
     else
       throw Exception('task at index $index is null');
