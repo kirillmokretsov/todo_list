@@ -6,7 +6,7 @@ class HiveUtils {
 
   static bool _isBoxInit = false;
 
-  static void initBox() async => await Hive.openBox(_tasksBoxName);
+  static Future<void> initBox() async => await Hive.openBox(_tasksBoxName);
 
   static Box<Task> getBox() {
     if (!_isBoxInit) {
