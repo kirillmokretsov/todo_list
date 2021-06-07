@@ -22,4 +22,16 @@ class HiveUtils {
         return _boxOfIncompleted!;
     }
   }
+
+  static void moveToAnotherBox(Task task, {required int indexOfDeleted}) {
+    if (task.isCompleted) {
+      _boxOfCompleted!.deleteAt(indexOfDeleted);
+      task.isCompleted = false;
+      _boxOfIncompleted!.add(task);
+    } else {
+      _boxOfIncompleted!.deleteAt(indexOfDeleted);
+      task.isCompleted = true;
+      _boxOfCompleted!.add(task);
+    }
+  }
 }

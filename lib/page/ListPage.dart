@@ -34,7 +34,7 @@ class _ListPageState extends State<ListPage> {
           leading: Checkbox(
             value: task.isCompleted,
             onChanged: (bool? value) {
-              task!.isCompleted = value!;
+              HiveUtils.moveToAnotherBox(task!, indexOfDeleted: index);
               setState(() {});
             },
           ),
