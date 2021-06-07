@@ -4,6 +4,15 @@ import 'package:todo_list/datamodel/TaskDataModel.dart';
 class HiveUtils {
   static final _tasksBoxName = 'tasks';
 
-  static Future<Box<Task>> getBox() async =>
-      await Hive.openBox<Task>(_tasksBoxName);
+  static bool _isBoxInit = false;
+
+  static void initBox() async => await Hive.openBox(_tasksBoxName);
+
+  static Box<Task> getBox() {
+    if (!_isBoxInit) {
+      throw Exception('Need to initialize box firstly');
+    } else {
+      return Hive.box(_tasksBoxName);
+    }
+  }
 }
