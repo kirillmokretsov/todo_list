@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todo_list/database/HiveUtils.dart';
 import 'package:todo_list/datamodel/TaskDataModel.dart';
 import 'package:todo_list/page/ListPage.dart';
 
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TaskAdapter());
+  await HiveUtils.initBox();
   runApp(MyApp());
 }
 
