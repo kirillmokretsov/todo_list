@@ -15,7 +15,7 @@ Run:
 git clone https://github.com/kirillmokretsov/todo_list.git
 cd todo_list
 flutter pub get 
-flutter build apk
+flutter build apk --obfuscate --split-debug-info=split_debug_info
 ```
 
 Now you can get apk in ``build/app/outputs/flutter-apk/app-release.apk``
