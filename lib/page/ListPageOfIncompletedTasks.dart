@@ -3,20 +3,22 @@ import 'package:hive/hive.dart';
 import 'package:todo_list/database/HiveUtils.dart';
 import 'package:todo_list/datamodel/TaskDataModel.dart';
 import 'package:todo_list/dialog/EditTaskDialog.dart';
+import 'package:todo_list/page/ListPageOfCompletedTasks.dart';
 import 'package:todo_list/widget/TasksList.dart';
 import 'package:uuid/uuid.dart';
 
 class ListPageOfIncompletedTasks extends StatefulWidget {
-
   ListPageOfIncompletedTasks({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _ListPageOfIncompletedTasksState createState() => _ListPageOfIncompletedTasksState();
+  _ListPageOfIncompletedTasksState createState() =>
+      _ListPageOfIncompletedTasksState();
 }
 
-class _ListPageOfIncompletedTasksState extends State<ListPageOfIncompletedTasks> {
+class _ListPageOfIncompletedTasksState
+    extends State<ListPageOfIncompletedTasks> {
   late Box<Task> box;
 
   @override
@@ -30,6 +32,12 @@ class _ListPageOfIncompletedTasksState extends State<ListPageOfIncompletedTasks>
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            onPressed: _showSaved,
+            icon: Icon(Icons.list),
+          ),
+        ],
       ),
       body: TasksList(false),
       floatingActionButton: FloatingActionButton(
@@ -55,5 +63,16 @@ class _ListPageOfIncompletedTasksState extends State<ListPageOfIncompletedTasks>
       box.add(result);
     }
     setState(() {});
+  }
+
+  void _showSaved() async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ListPageOfCompletedTasks(title: widget.title),
+      ),
+    );
+    setState(() {
+      // If user makes task incompleted then show it in list of incompleted
+    });
   }
 }
