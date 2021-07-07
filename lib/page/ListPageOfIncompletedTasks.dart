@@ -7,6 +7,8 @@ import 'package:todo_list/page/ListPageOfCompletedTasks.dart';
 import 'package:todo_list/widget/TasksList.dart';
 import 'package:uuid/uuid.dart';
 
+import 'MyAboutPage.dart';
+
 class ListPageOfIncompletedTasks extends StatefulWidget {
   ListPageOfIncompletedTasks({Key? key, required this.title}) : super(key: key);
 
@@ -36,6 +38,10 @@ class _ListPageOfIncompletedTasksState
           IconButton(
             onPressed: _showSaved,
             icon: Icon(Icons.list),
+          ),
+          IconButton(
+            onPressed: () => MyAboutPage.showAbout(context),
+            icon: Icon(Icons.info_outline),
           ),
         ],
       ),
