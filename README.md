@@ -13,7 +13,7 @@ Follow steps to [sign your app](https://flutter.dev/docs/deployment/android#sign
 Run:  
 ``` shell script
 git clone https://github.com/kirillmokretsov/todo_list.git
-cd otp_storage
+cd todo_list
 flutter pub get 
 flutter build apk
 ```
