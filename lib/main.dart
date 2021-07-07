@@ -5,8 +5,7 @@ import 'package:todo_list/database/HiveUtils.dart';
 import 'package:todo_list/datamodel/TaskDataModel.dart';
 import 'package:todo_list/page/ListPageOfIncompletedTasks.dart';
 
-// TODO: add page to show completed tasks
-// TODO: add ability to sort tasks
+// TODO: add ability to sort tasks: by name, by time of creation, by time of editing
 
 void main() async {
   await Hive.initFlutter();
