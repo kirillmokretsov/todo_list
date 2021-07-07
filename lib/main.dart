@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_list/database/HiveUtils.dart';
 import 'package:todo_list/datamodel/TaskDataModel.dart';
-import 'package:todo_list/page/ListPage.dart';
+import 'package:todo_list/page/ListPageOfIncompletedTasks.dart';
 
 // TODO: add page to show completed tasks
 // TODO: add ability to sort tasks
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         accentColor: Colors.amberAccent,
       ),
-      home: ListPage(false, title: 'Todos'),
+      home: ListPageOfIncompletedTasks(title: 'Todos'),
     );
   }
 }

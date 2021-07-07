@@ -6,24 +6,23 @@ import 'package:todo_list/dialog/EditTaskDialog.dart';
 import 'package:todo_list/widget/TasksList.dart';
 import 'package:uuid/uuid.dart';
 
-class ListPage extends StatefulWidget {
-  final bool isCompleted;
+class ListPageOfIncompletedTasks extends StatefulWidget {
 
-  ListPage(this.isCompleted, {Key? key, required this.title}) : super(key: key);
+  ListPageOfIncompletedTasks({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _ListPageState createState() => _ListPageState();
+  _ListPageOfIncompletedTasksState createState() => _ListPageOfIncompletedTasksState();
 }
 
-class _ListPageState extends State<ListPage> {
+class _ListPageOfIncompletedTasksState extends State<ListPageOfIncompletedTasks> {
   late Box<Task> box;
 
   @override
   void initState() {
     super.initState();
-    box = HiveUtils.getBox(widget.isCompleted);
+    box = HiveUtils.getBox(false);
   }
 
   @override
@@ -32,7 +31,7 @@ class _ListPageState extends State<ListPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: TasksList(widget.isCompleted),
+      body: TasksList(false),
       floatingActionButton: FloatingActionButton(
         onPressed: _addTask,
         child: Icon(Icons.add),
