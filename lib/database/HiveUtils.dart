@@ -6,15 +6,19 @@ class HiveUtils {
 
   static Box<Task>? _boxOfIncompleted;
   static Box<Task>? _boxOfCompleted;
+  static Box<Task>? _boxOfDeleted;
+
+  static var _e = Exception('Need to initialize box firstly');
 
   static Future<void> initBox() async {
     _boxOfIncompleted = await Hive.openBox(_tasksBoxName + '_incompleted');
     _boxOfCompleted = await Hive.openBox(_tasksBoxName + '_completed');
+    _boxOfDeleted = await Hive.openBox(_tasksBoxName + "_deleted");
   }
 
   static Box<Task> getBox(bool isCompleted) {
     if (_boxOfCompleted == null || _boxOfIncompleted == null) {
-      throw Exception('Need to initialize box firstly');
+      throw _e;
     } else {
       if (isCompleted)
         return _boxOfCompleted!;
@@ -22,6 +26,14 @@ class HiveUtils {
         return _boxOfIncompleted!;
     }
   }
+
+  static Box<Task> getBoxOfDeleted() {
+      if (_boxOfDeleted == null) {
+          throw _e;
+      } else {
+          return _boxOfDeleted!;
+      }
+    }
 
   static void moveToAnotherBox(Task task, {required int indexOfDeleted}) {
     if (task.isCompleted) {
