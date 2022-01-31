@@ -20,11 +20,15 @@ class Task extends HiveObject {
   @HiveField(4)
   bool isCompleted;
 
+  @HiveField(5)
+  bool isDeleted;
+
   Task({
     required this.id,
     required this.title,
     required this.timeAdded,
     required this.timeEdited,
     this.isCompleted: false,
+    this.isDeleted: false,
   });
 }
