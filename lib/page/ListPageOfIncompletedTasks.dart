@@ -4,6 +4,7 @@ import 'package:todo_list/database/HiveUtils.dart';
 import 'package:todo_list/datamodel/TaskDataModel.dart';
 import 'package:todo_list/dialog/EditTaskDialog.dart';
 import 'package:todo_list/page/ListPageOfCompletedTasks.dart';
+import 'package:todo_list/page/ListPageOfDeleted.dart';
 import 'package:todo_list/widget/TasksList.dart';
 import 'package:uuid/uuid.dart';
 
@@ -38,6 +39,10 @@ class _ListPageOfIncompletedTasksState
           IconButton(
             onPressed: _showSaved,
             icon: Icon(Icons.list),
+          ),
+          IconButton(
+            onPressed: () => _showDeleted(),
+            icon: Icon(Icons.delete_outline)
           ),
           IconButton(
             onPressed: () => MyAboutPage.showAbout(context),
@@ -81,4 +86,15 @@ class _ListPageOfIncompletedTasksState
       // If user makes task incompleted then show it in list of incompleted
     });
   }
+
+  void _showDeleted() async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ListPageOfDeleted(
+          boxOfDeleted: HiveUtils.getBoxOfDeleted(), 
+          title: widget.title,
+        ),
+      )
+    );
+    }
 }

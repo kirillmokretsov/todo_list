@@ -51,6 +51,7 @@ class _TasksListState extends State<TasksList> {
               task!,
               indexOfDeleted: index,
             );
+            setState(() {});
           } else if (direction == DismissDirection.startToEnd) {
             final result = await showDialog(
               context: context,
