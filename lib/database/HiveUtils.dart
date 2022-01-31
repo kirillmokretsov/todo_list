@@ -46,4 +46,16 @@ class HiveUtils {
       _boxOfCompleted!.add(task);
     }
   }
+
+  static void deleteTask(Task task, {required int indexOfDeleted}) {
+      if (task.isCompleted) {
+          _boxOfCompleted!.deleteAt(indexOfDeleted);
+          task.isDeleted = true;
+          _boxOfDeleted!.add(task);
+      } else {
+          _boxOfIncompleted!.deleteAt(indexOfDeleted);
+          task.isDeleted = true;
+          _boxOfDeleted!.add(task);
+      }
+  }
 }

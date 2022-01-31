@@ -47,7 +47,10 @@ class _TasksListState extends State<TasksList> {
         ),
         onDismissed: (direction) async {
           if (direction == DismissDirection.endToStart) {
-            box.deleteAt(index);
+            HiveUtils.deleteTask(
+              task!,
+              indexOfDeleted: index,
+            );
           } else if (direction == DismissDirection.startToEnd) {
             final result = await showDialog(
               context: context,
