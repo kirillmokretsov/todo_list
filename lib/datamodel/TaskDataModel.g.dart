@@ -22,7 +22,7 @@ class TaskAdapter extends TypeAdapter<Task> {
       timeAdded: fields[2] as int,
       timeEdited: fields[3] as int,
       isCompleted: fields[4] as bool,
-      isDeleted: fields[5] as bool,
+      isDeleted: fields[5] == null ? false : fields[5] as bool,
     );
   }
 

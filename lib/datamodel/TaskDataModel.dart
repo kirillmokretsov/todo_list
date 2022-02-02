@@ -20,7 +20,7 @@ class Task extends HiveObject {
   @HiveField(4)
   bool isCompleted;
 
-  @HiveField(5)
+  @HiveField(5, defaultValue: false)
   bool isDeleted;
 
   Task({
